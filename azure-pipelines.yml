@@ -18,4 +18,11 @@ steps:
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
 
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'SonarCloud'
+    organization: 'cymansys'
+    scannerMode: 'MSBuild'
+    projectKey: 'geekslayer_kickass-music-player'
+    projectName: 'kickass-music-player'
 - task: SonarCloudAnalyze@1
