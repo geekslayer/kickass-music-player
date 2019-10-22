@@ -30,10 +30,11 @@ steps:
   inputs:
     command: 'restore'
     projects: '**/*.csproj'
-    arguments: '--configuration Release' # Update this to match your need
 
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
+    projects: '**/*.csproj'
+    arguments: '--configuration Release' # Update this to match your need
 
 - task: SonarCloudAnalyze@1
