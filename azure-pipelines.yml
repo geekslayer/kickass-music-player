@@ -25,4 +25,14 @@ steps:
     scannerMode: 'MSBuild'
     projectKey: 'geekslayer_kickass-music-player'
     projectName: 'kickass-music-player'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'restore'
+    feedsToUse: 'select'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+
 - task: SonarCloudAnalyze@1
