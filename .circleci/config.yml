@@ -3,12 +3,12 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/python
+      - image: circleci/node:latest
     steps:
       - checkout
       - run:
           name: Install dependencies and build project
-          #command: ********** CHANGE ME 2 **********
+          command: npm install
       - sonarcloud/scan
 
 orbs:
