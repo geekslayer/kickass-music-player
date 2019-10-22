@@ -1,4 +1,5 @@
 # Starter pipeline
+- task: SonarCloudAnalyze@1
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
@@ -25,4 +26,26 @@ steps:
     scannerMode: 'MSBuild'
     projectKey: 'geekslayer_kickass-music-player'
     projectName: 'kickass-music-player'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'restore'
+    projects: '**/*.csproj'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    projects: '**/*.csproj'
+    arguments: '--configuration Release' # Update this to match your need
+
 - task: SonarCloudAnalyze@1
+displayName: 'Run Code Analysis'
+enabled: true
+continueOnError: false
+
+- task: SonarCloudPublish@1
+displayName: 'Publish Quality Gate Result'
+enabled: true
+continueOnError: false
+  inputs:
+    pollingTimeoutSec: '300'
