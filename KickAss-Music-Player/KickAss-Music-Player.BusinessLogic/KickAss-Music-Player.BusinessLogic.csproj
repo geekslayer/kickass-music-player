@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <RootNamespace>KickAss_Music_Player.BusinessLogic</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\KickAss-Music-Player.DataModels\KickAss-Music-Player.DataModels.csproj" />
+  </ItemGroup>
+
+</Project>
