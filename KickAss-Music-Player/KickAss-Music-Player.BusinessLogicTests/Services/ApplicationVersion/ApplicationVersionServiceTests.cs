@@ -1,28 +1,43 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using KickAss_Music_Player.BusinessLogic.Services.ApplicationVersion;
+using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
+using System;
 
-namespace KickAss_Music_Player.BusinessLogic.Services.ApplicationVersion.Tests
+namespace KickAss_Music_Player.BusinessLogicTests.Services.ApplicationVersion
 {
-    [TestClass()]
+    [TestFixture]
     public class ApplicationVersionServiceTests
     {
-        private readonly IApplicationVersionService _applicationVersionService;
-        [OneTimeSetUp]
-        public void ClassInit()
-        {
+        private IApplicationVersionService _applicationVersionService;
+        private ServiceProvider serviceProvider { get; set; }
 
+        [SetUp]
+        public void Setup()
+        {
+            var services = new ServiceCollection();
+            services.AddTransient<IApplicationVersionService, ApplicationVersionService>();
+            serviceProvider = services.BuildServiceProvider();
+
+            _applicationVersionService = serviceProvider.GetService<IApplicationVersionService>();
         }
 
         [TearDown]
         public void ClassCleanUp()
         {
-
+            _applicationVersionService = null;
         }
 
-        [TestMethod()]
-        public void GetApplicationVersionTest()
+        [TestCase("0.1.0", true)]
+        [TestCase("0.1.1", false)]
+        [TestCase("0.2.0", false)]
+        [TestCase("0.3.0", false)]
+        [TestCase("0.4.0", false)]
+        [TestCase("0.4.2", false)]
+        public void GetApplicationVersionTest_ReturnsValid(string versionValue, bool shouldMatch)
         {
-            Assert.Fail();
+            var versionString = _applicationVersionService.GetApplicationVersion().Result;
+
+            Assert.AreEqual(shouldMatch, Convert.ToString(versionString.Data) == versionValue);
         }
     }
 }
