@@ -33,7 +33,7 @@ namespace KickAss_Music_Player.BusinessLogicTests.Services.ApplicationVersion
         [TestCase("0.3.0", false)]
         [TestCase("0.4.0", false)]
         [TestCase("0.4.2", false)]
-        public void GetApplicationVersionTest_ReturnsValid(string versionValue, bool shouldMatch)
+        public void GetApplicationVersionTest(string versionValue, bool shouldMatch)
         {
             var versionString = _applicationVersionService.GetApplicationVersion().Result;
 
