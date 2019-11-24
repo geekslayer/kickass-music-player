@@ -1,9 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <RootNamespace>KickAss_Music_Player.Test</RootNamespace>
-
+    <ProjectGuid>{2FFA3321-E1B9-40D7-824B-41F0BAB48413}</ProjectGuid>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
