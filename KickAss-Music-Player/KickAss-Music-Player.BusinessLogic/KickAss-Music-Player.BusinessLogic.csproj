@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <RootNamespace>KickAss_Music_Player.BusinessLogic</RootNamespace>
+    <ProjectGuid>{B0CF1AB4-9BE8-4BF8-AA6D-3D14A520C94B}</ProjectGuid>
   </PropertyGroup>
 
   <ItemGroup>

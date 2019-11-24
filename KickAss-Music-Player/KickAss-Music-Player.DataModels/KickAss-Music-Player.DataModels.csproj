@@ -1,8 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <RootNamespace>KickAss_Music_Player.DataModels</RootNamespace>
+    <ProjectGuid>{CA9D95FF-FC9E-4162-85AC-126868FCE22E}</ProjectGuid>
   </PropertyGroup>
 
 </Project>
