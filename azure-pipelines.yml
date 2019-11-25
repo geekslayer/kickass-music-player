@@ -35,13 +35,14 @@ steps:
     command: 'build'
     projects: '**/*.csproj'
     arguments: '--configuration Release' # Update this to match your need
+displayName: 'Build API'
 
 - task: DotNetCoreCLI@2
   inputs:
     command: 'test'
     projects: '**/*Tests/*.csproj'
     arguments: '-c $(BuildConfiguration)'
-  displayName: Run Tests
+  displayName: 'Run API Tests'
 
 # - task: DotNetCoreCLI@2
 #   inputs:
