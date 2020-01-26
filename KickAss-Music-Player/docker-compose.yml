@@ -13,8 +13,15 @@ services:
         POSTGRES_DB: keycloak
         POSTGRES_USER: keycloak
         POSTGRES_PASSWORD: password
+      # command:
+      #   - /etc/init.d/postgresql start
+      #   - psql --command "DROP SCHEMA public CASCADE;"
+      #   - psql --command "CREATE SCHEMA public;"
+      #   - psql --command "GRANT ALL ON SCHEMA public TO postgres;"
+      #   - psql --command "GRANT ALL ON SCHEMA public TO public;"
   keycloak:
-      image: jboss/keycloak
+      image: jboss/keycloak:latest
+      #build: ./KickAss-Music-Player/docker/keycloak
       environment:
         DB_VENDOR: POSTGRES
         DB_ADDR: postgres
@@ -30,3 +37,10 @@ services:
         - 8080:8080
       depends_on:
         - postgres
+  # web:
+  #     build: .
+  #     ports: 
+  #       - 8081:80
+  #       - 8082:443
+  #     depends_on: 
+  #       - keycloak

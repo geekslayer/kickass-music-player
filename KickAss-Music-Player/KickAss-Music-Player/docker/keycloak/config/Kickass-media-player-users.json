@@ -1,0 +1,23 @@
+{
+  "realm": "KickAss-Media-Player",
+  "users": [
+    {
+      "id": "7550d038-ce37-4f19-8ebf-cfa2668da166",
+      "createdTimestamp": 1520022620428,
+      "username": "etienne.gauthier",
+      "enabled": true,
+      "totp": false,
+      "emailVerified": false,
+      "firstName": "Etienne",
+      "lastName": "Gauthier",
+      "email": "gauthier.etienne@gmail.com",
+      "disableableCredentialTypes": [ "password" ],
+      "requiredActions": [],
+      "clientRoles": {
+        "account": [ "manage-account", "view-profile" ]
+      },
+      "notBefore": 0,
+      //"groups": [ "/Admin-Dev" ]
+    }
+  ]
+}
