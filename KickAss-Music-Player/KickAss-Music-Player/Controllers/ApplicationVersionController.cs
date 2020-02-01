@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace KickAss_Music_Player.Controllers
 {
     [ApiController]
-    //[Authorize]
+    [Authorize]
     [Route("[controller]")]
     public class ApplicationVersionController : BaseController
     {
@@ -17,9 +17,9 @@ namespace KickAss_Music_Player.Controllers
 
         private readonly ILogger<ApplicationVersionController> _logger;
 
-        public ApplicationVersionController(ILogger<ApplicationVersionController> logger, IApplicationVersionService applicationVersionService, ITokenInterpretor tokenInterpretor) : base(tokenInterpretor)
+        public ApplicationVersionController(/*ILogger<ApplicationVersionController> logger,*/ IApplicationVersionService applicationVersionService, ITokenInterpretor tokenInterpretor)
         {
-            _logger = logger;
+            //_logger = logger;
             _applicationVersionService = applicationVersionService;
         }
 

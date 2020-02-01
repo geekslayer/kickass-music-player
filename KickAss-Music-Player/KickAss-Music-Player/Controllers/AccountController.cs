@@ -12,7 +12,7 @@ namespace KickAss_Music_Player.Controllers
     [AllowAnonymous]
     public class AccountController : BaseController
     {
-        protected AccountController(ITokenInterpretor tokenInterpretor) : base(tokenInterpretor)
+        protected AccountController(/*ITokenInterpretor tokenInterpretor*/)
         {
         }
 
