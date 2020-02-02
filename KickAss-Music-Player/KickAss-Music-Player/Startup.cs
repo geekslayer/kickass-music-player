@@ -53,11 +53,11 @@ namespace KickAss_Music_Player
             
             services.AddAntiforgery(options => options.HeaderName = "X-XSRF-TOKEN");
 
-            var bla = services.BuildServiceProvider();
-            var userSvc = bla.GetRequiredService<IUserService>();
+            // var bla = services.BuildServiceProvider();
+            // var userSvc = bla.GetRequiredService<IUserService>();
             services.AddMvc(config =>
             {
-                config.Filters.Add(new CreatedModifiedFilterAttribute(new TokenInterpretor(userSvc)));
+                //config.Filters.Add(new CreatedModifiedFilterAttribute(new TokenInterpretor(userSvc)));
             })
             .AddNewtonsoftJson(options =>
             {

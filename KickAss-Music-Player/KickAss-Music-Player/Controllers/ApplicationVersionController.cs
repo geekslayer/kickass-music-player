@@ -15,7 +15,7 @@ namespace KickAss_Music_Player.Controllers
     {
         private readonly IApplicationVersionService _applicationVersionService;
 
-        private readonly ILogger<ApplicationVersionController> _logger;
+        // private readonly ILogger<ApplicationVersionController> _logger;
 
         public ApplicationVersionController(/*ILogger<ApplicationVersionController> logger,*/ IApplicationVersionService applicationVersionService, ITokenInterpretor tokenInterpretor)
         {
