@@ -1,5 +1,6 @@
 ﻿using KickAss_Music_Player.BusinessLogic.Services.ApplicationVersion;
 using KickAss_Music_Player.DataModels.Dto.ApplicationVersion.Results;
+using KickAss_Music_Player.DataModels.Security;
 using KickAss_Music_Player.Security;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -24,6 +25,7 @@ namespace KickAss_Music_Player.Controllers
         }
 
         [HttpGet]
+        [Permission(PermissionType.ApplicationVersion)]
         public async Task<ApplicationVersionResult> Get()
         {
             return await _applicationVersionService.GetApplicationVersion();

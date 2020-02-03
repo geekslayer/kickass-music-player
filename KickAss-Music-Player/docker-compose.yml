@@ -6,21 +6,15 @@ volumes:
 
 services:
   postgres:
-      image: postgres
+      image: postgres:latest
       volumes:
         - postgres_data:/var/lib/postgresql/data
       environment:
         POSTGRES_DB: keycloak
         POSTGRES_USER: keycloak
         POSTGRES_PASSWORD: password
-      # command:
-      #   - /etc/init.d/postgresql start
-      #   - psql --command "DROP SCHEMA public CASCADE;"
-      #   - psql --command "CREATE SCHEMA public;"
-      #   - psql --command "GRANT ALL ON SCHEMA public TO postgres;"
-      #   - psql --command "GRANT ALL ON SCHEMA public TO public;"
   keycloak:
-      image: jboss/keycloak:latest
+      image: jboss/keycloak:8.0.1
       #build: ./KickAss-Music-Player/docker/keycloak
       environment:
         DB_VENDOR: POSTGRES

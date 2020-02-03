@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace KickAss_Music_Player.DataModels.Security
+﻿namespace KickAss_Music_Player.DataModels.Security
 {
     public enum PermissionType
     {
-        AllAuthenticated = 0
+        AllAuthenticated = 0,
+        ApplicationVersion,
     }
 }
 

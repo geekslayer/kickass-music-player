@@ -1,4 +1,4 @@
-﻿FROM jboss/keycloak
+﻿FROM jboss/keycloak:8.0.1
 
 ENV TZ America/Montreal
 
