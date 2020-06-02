@@ -4,7 +4,6 @@ using KickAss_Music_Player.DataModels.Security;
 using KickAss_Music_Player.Security;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
 namespace KickAss_Music_Player.Controllers
@@ -18,7 +17,7 @@ namespace KickAss_Music_Player.Controllers
 
         // private readonly ILogger<ApplicationVersionController> _logger;
 
-        public ApplicationVersionController(/*ILogger<ApplicationVersionController> logger,*/ IApplicationVersionService applicationVersionService, ITokenInterpretor tokenInterpretor)
+        public ApplicationVersionController(/*ILogger<ApplicationVersionController> logger,*/ IApplicationVersionService applicationVersionService, ITokenInterpretor tokenInterpretor):base(tokenInterpretor)
         {
             //_logger = logger;
             _applicationVersionService = applicationVersionService;

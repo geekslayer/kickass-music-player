@@ -21,10 +21,10 @@ namespace KickAss_Music_Player.Controllers
         /// <param name="services">Service context</param>
         /// <param name="logger">Logger (NLog)</param>
         /// <param name="tokenInterpretor">Token information processor</param>
-        protected BaseController(/*IServicesContext services, ITokenInterpretor tokenInterpretor*/)
+        protected BaseController(/*IServicesContext services,*/ ITokenInterpretor tokenInterpretor)
         {
             //ServicesContext = services;
-            //TokenInterpretor = tokenInterpretor;
+            TokenInterpretor = tokenInterpretor;
         }
     }
 }

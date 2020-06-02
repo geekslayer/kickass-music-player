@@ -1,6 +1,7 @@
 using API.Filters;
 using KickAss_Music_Player.BusinessLogic.Services.ApplicationVersion;
 using KickAss_Music_Player.BusinessLogic.Services.User;
+using KickAss_Music_Player.DataModels.Security;
 using KickAss_Music_Player.Security;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -11,8 +12,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Newtonsoft.Json;
+using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Threading.Tasks;
+using Autofac;
 
 namespace KickAss_Music_Player
 {
@@ -35,29 +38,39 @@ namespace KickAss_Music_Player
 
         public IConfiguration Configuration { get; }
 
+        private static IContainer Container { get; set; }
+
         public IWebHostEnvironment Environment { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IApplicationVersionService, ApplicationVersionService>();
-            services.AddTransient<IUserService, UserService>();
-
             services.AddControllers();
 
             var authenticationSettings = Configuration.GetSection("AuthenticationSettings").Get<AuthenticationSetting>();
             _keycloakTokenValidationParameter = new KeycloakTokenValidationParameters(authenticationSettings);
             services.AddSingleton(_keycloakTokenValidationParameter);
-            services.AddTransient<ITokenInterpretor, TokenInterpretor>();
             services.AddCors();
             
             services.AddAntiforgery(options => options.HeaderName = "X-XSRF-TOKEN");
 
-            // var bla = services.BuildServiceProvider();
-            // var userSvc = bla.GetRequiredService<IUserService>();
+            // Autofac
+            #region
+            var autofacServiceProvider = new ContainerBuilder();
+
+            autofacServiceProvider.RegisterType<ApplicationVersionService>().As<IApplicationVersionService>();
+            autofacServiceProvider.RegisterType<UserService>().As<IUserService>();
+            autofacServiceProvider.RegisterType<TokenInterpretor>().As<ITokenInterpretor>();
+
+            Container = autofacServiceProvider.Build();
+
+            services.AddSingleton<IContainer>(Container);
+            #endregion
+
+            var userSvc = Container.Resolve<IUserService>();
             services.AddMvc(config =>
             {
-                //config.Filters.Add(new CreatedModifiedFilterAttribute(new TokenInterpretor(userSvc)));
+                config.Filters.Add(new CreatedModifiedFilterAttribute(new TokenInterpretor(userSvc)));
             })
             .AddNewtonsoftJson(options =>
             {
@@ -105,9 +118,17 @@ namespace KickAss_Music_Player
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(builder => builder.AllowAnyOrigin()
+                            .AllowAnyHeader()
+                            .AllowAnyMethod()
+                            .SetPreflightMaxAge(new TimeSpan(0, 1, 0, 0))
+                            );
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseStaticFiles();
 
             app.UseAuthentication();
 
@@ -117,6 +138,11 @@ namespace KickAss_Music_Player
             {
                 endpoints.MapControllers();
             });
+
+            //app.UseMvc(routes =>
+            //{
+            //    routes.MapRoute("default", "api/{controller}/{action=Index}/{id?}");
+            //});
         }
 
         private Task TokenAuthFailed(AuthenticationFailedContext arg)

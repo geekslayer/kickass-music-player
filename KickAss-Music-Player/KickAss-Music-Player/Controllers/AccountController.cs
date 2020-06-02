@@ -12,7 +12,7 @@ namespace KickAss_Music_Player.Controllers
     [AllowAnonymous]
     public class AccountController : BaseController
     {
-        protected AccountController(/*ITokenInterpretor tokenInterpretor*/)
+        protected AccountController(ITokenInterpretor tokenInterpretor) : base(tokenInterpretor)
         {
         }
 
@@ -20,13 +20,19 @@ namespace KickAss_Music_Player.Controllers
         [Route("Login")]
         public async Task<AccountResult> Login([FromBody] LoginCommand loginCommand)
         {
+            // Log the user in
+
             return await Task.FromResult(new AccountResult());
         }
 
-        public async Task<string> Get()
+        [HttpPost]
+        [Route("Logout")]
+        [Authorize]
+        public async Task<AccountResult> Logout([FromBody] LogoutCommand logoutCommand)
         {
-            return await Task.FromResult("GoGoGo!!!");
-        }
+            // Log the user out
 
+            return await Task.FromResult(new AccountResult());
+        }
     }
 }
